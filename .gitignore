@@ -102,3 +102,6 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# muh token is stored as plain text ehehehehe
+token.txt
