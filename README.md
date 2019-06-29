@@ -4,7 +4,7 @@ Karl Marx 2 takes a somewhat different spin on moderation for smaller servers (~
 
 <center><img src="mute_demo.png" width=400/></center>
 
-I didn't have as much time as I would have liked to work on this, but even after Hack Week, I intend to progressively improve its abilities/scalability and even flesh out its functionality beyond just moderation and further improve it.
+I didn't have as much time as I would have liked to work on this, but even after Hack Week, I intend to progressively expand its abilities/scalability and even flesh out its functionality beyond just moderation and further improve it.
 
 Made with love. [Enjoy!](https://discordapp.com/oauth2/authorize?client_id=592852914553487370&permissions=8&scope=bot) :)
 
