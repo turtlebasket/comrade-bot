@@ -42,17 +42,17 @@ async def manual(ctx):
     embed = discord.Embed(title="How 2 Comrade")
     embed.add_field(
         name=">>mute",
-        value="Hold a 30-second vote to mute a user for 10 minutes (minimum voters: 4, over 50% majority required). You can set different requirements in `config.json`."
+        value="Hold a {0}-second vote to mute a user for {1} minutes (minimum voters: {2}, over 50% majority required). You can set different requirements in `config.json`.".format(MUTE_VOTE_TIME, int(MUTE_TIME/60), MIN_MUTE_VOTERS)
     )
 
     embed.add_field(
         name=">>kick",
-        value="Kick user. The vote is up for 5 minutes, and requires that a minimum of 6 users and >50% approve."
+        value="Kick user. The vote is up for {0} minutes, and requires that a minimum of {1} users and >50% approve.".format(int(KICK_VOTE_TIME/60), MIN_KICK_VOTERS)
     )
 
     embed.add_field(
         name=">>exile",
-        value="Ban user. By default, the vote lasts 3 hours, and requires that there be at least 10 votes and a 50% majority. Like the `>>mute`/`>>kick` commands, you can also tweak settings in `config.json`."
+        value="Ban user. By default, the vote lasts {0} minutes, and requires that there be at least {1} votes and a 50% majority. Like the `>>mute`/`>>kick` commands, you can also tweak settings in `config.json`.".format(int(BAN_VOTE_TIME/60), MIN_BAN_VOTERS)
     )
     
     await ctx.send(embed=embed)
