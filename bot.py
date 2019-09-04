@@ -5,6 +5,7 @@ A bot by turtlebasket
 
 import asyncio
 import json
+from urllib.request import urlopen, Request
 import discord
 from discord.ext import commands
 from bot_utils import *
@@ -69,6 +70,11 @@ async def help(ctx):
         name=">>ping",
         value="Get bot latency."
     )
+
+    embed.add_field(
+        name=">>shibe",
+        value="shibe :dog: :eyes"
+    )
     
     await ctx.send(embed=embed)
 
@@ -100,6 +106,13 @@ async def addEmote(ctx, emote_name: str):
         file_bytes = await ctx.message.attachments[0].read()
         await ctx.guild.create_custom_emoji(name=emote_name, image=file_bytes)
 
+@bot.command()
+async def shibe(ctx):
+    # with urllib.request.urlopen("http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=true") as json_return:
+    with urlopen(Request(url="http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=true", headers={'User-Agent': 'Mozilla/5.0'})) as json_return:
+        shibe_contents = json_return.read()
+    await ctx.send(embed=discord.Embed(
+        title="{0}, here is your random shibe:".format(ctx.message.author.name)).set_image(url=json.loads(shibe_contents)[0]))
     
 @bot.command(aliases=['latency'])
 async def ping(ctx):
