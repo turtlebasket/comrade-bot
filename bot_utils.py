@@ -1,3 +1,4 @@
+import random
 import discord
 from discord.ext import commands
 import asyncio
@@ -53,3 +54,8 @@ async def take_vote(ctx, question:str, wait_time, min_voters):
 
 async def improper_usage(ctx):
     await ctx.send("Improper command usage! See `>>help` for more.")
+
+def imgfun(msg:str, img_url:str):
+    return discord.Embed(
+        title=msg, color=random.randint(0, 16777215)
+    ).set_image(url=img_url)

@@ -6,6 +6,7 @@ A bot by turtlebasket
 import asyncio
 import json
 from urllib.request import urlopen, Request
+import random
 import discord
 from discord.ext import commands
 from bot_utils import *
@@ -111,8 +112,9 @@ async def shibe(ctx):
     # with urllib.request.urlopen("http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=true") as json_return:
     with urlopen(Request(url="http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=true", headers={'User-Agent': 'Mozilla/5.0'})) as json_return:
         shibe_contents = json_return.read()
-    await ctx.send(embed=discord.Embed(
-        title="{0}, here is your random shibe:".format(ctx.message.author.name)).set_image(url=json.loads(shibe_contents)[0]))
+        msg="{0}, here is your random shibe:".format(ctx.message.author.name)
+        url=json.loads(shibe_contents)[0]
+    await ctx.send(embed=imgfun(msg, url))
     
 @bot.command(aliases=['latency'])
 async def ping(ctx):
