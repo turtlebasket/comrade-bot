@@ -38,7 +38,7 @@ banning_users = []
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Game(name='>>help'))
+    await bot.change_presence(activity=discord.Game(name='{} servers | >>help'.format(len(bot.guilds))))
     print("Bot started.")
     print("--------------------------")
 
@@ -67,7 +67,7 @@ async def help(ctx):
 
     embed.add_field(
         name=">>ping",
-        value="Get bot latency. Still being implemented."
+        value="Get bot latency."
     )
     
     await ctx.send(embed=embed)
@@ -103,7 +103,7 @@ async def addEmote(ctx, emote_name: str):
     
 @bot.command(aliases=['latency'])
 async def ping(ctx):
-    await ctx.send("Currently under construction")
+    await ctx.send("`Bot latency: {}s`".format(round(bot.latency, 2)))
 
 @bot.command()
 async def mute(ctx, target_user:discord.User):
