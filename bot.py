@@ -49,12 +49,12 @@ async def help(ctx):
     embed = discord.Embed(title="How 2 Comrade")
     embed.add_field(
         name=">>addEmote <emoji name>",
-        value="hold a {0}-second vote on whether or not to add a given emote (provided as a message attachment.".format(EMOTE_VOTE_TIME)
+        value="hold a {0}-second vote on whether or not to add a given emote (provided as a message attachment).".format(EMOTE_VOTE_TIME)
     )
 
     embed.add_field(
         name=">>mute <user>",
-        value="Hold a {0}-second vote to mute a user for {1} minutes (minimum voters: {2}, over 50% majority required). You can set different requirements in `config.json`.".format(MUTE_VOTE_TIME, int(MUTE_TIME/60), MIN_MUTE_VOTERS)
+        value="Hold a {0}-second vote to mute a user for {1} minutes (minimum voters: {2}, over 50% majority required).".format(MUTE_VOTE_TIME, int(MUTE_TIME/60), MIN_MUTE_VOTERS)
     )
 
     embed.add_field(
@@ -64,7 +64,7 @@ async def help(ctx):
 
     embed.add_field(
         name=">>ban <user>",
-        value="Ban user. By default, the vote lasts {0} minutes, and requires that there be at least {1} votes and a 50% majority. Like the `>>mute`/`>>kick` commands, you can also tweak settings in `config.json`.".format(int(BAN_VOTE_TIME/60), MIN_BAN_VOTERS)
+        value="Ban user. By default, the vote lasts {0} minutes, and requires that there be at least {1} votes and a 50% majority.".format(int(BAN_VOTE_TIME/60), MIN_BAN_VOTERS)
     )
 
     embed.add_field(
@@ -74,7 +74,7 @@ async def help(ctx):
 
     embed.add_field(
         name=">>shibe",
-        value="shibe :dog: :eyes"
+        value="shibe :dog: :eyes:"
     )
     
     await ctx.send(embed=embed)
