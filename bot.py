@@ -68,15 +68,19 @@ async def help(ctx):
     )
 
     embed.add_field(
-        name=">>ping",
-        value="Get bot latency."
-    )
-
-    embed.add_field(
         name=">>shibe",
         value="shibe :dog: :eyes:"
     )
+
+    embed.add_field(
+        name=">>birb",
+        value="birb :bird: :hatching_chick:"
+    )
     
+    embed.add_field(
+        name=">>ping",
+        value="Get bot latency."
+    )
     await ctx.send(embed=embed)
 
 
