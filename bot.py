@@ -103,6 +103,7 @@ async def addEmote(ctx, emote_name: str):
     vote_passed = await take_vote(ctx, "Add emoji `{}`?".format(emote_name), EMOTE_VOTE_TIME, MIN_EMOTE_VOTERS)
 
     # if all_in_favor > not_in_favor and all_in_favor > MIN_EMOTE_VOTERS:
+    await ctx.send(embed=imgfun(msg, url))
     if vote_passed:
         file_bytes = await ctx.message.attachments[0].read()
         await ctx.guild.create_custom_emoji(name=emote_name, image=file_bytes)
@@ -114,6 +115,16 @@ async def shibe(ctx):
         shibe_contents = json_return.read()
         msg="{0}, here is your random shibe:".format(ctx.message.author.name)
         url=json.loads(shibe_contents)[0]
+    await ctx.send(embed=imgfun(msg, url))
+
+@bot.command(aliases=['bird'])
+async def birb(ctx):
+    with urlopen(Request(url="http://random.birb.pw/tweet.json", headers={'User-Agent': 'Mozilla/5.0'})) as json_return:
+        # get image filename
+        birb_contents = json_return.read()
+        msg="{0}, here is your random birb:".format(ctx.message.author.name)
+        # insert image filename into URL
+        url="http://random.birb.pw/img/{}".format(json.loads(birb_contents)["file"])
     await ctx.send(embed=imgfun(msg, url))
     
 @bot.command(aliases=['latency'])
