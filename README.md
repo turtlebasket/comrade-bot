@@ -1,4 +1,4 @@
-<center>☭ Comrade Bot ☭</center>
+☭ Comrade Bot ☭
 ===
 
 Usage Philosophy
@@ -15,6 +15,6 @@ Invite Comrade!
 Screenshots
 ---
 
-<center><img src="scrots/emote_demo.png" width=400/></center><br>
-<center><img src="scrots/shibe_demo.png" width=400/></center><br>
-<center><img src="scrots/birb_demo.png" width=400/></center>
+<img src="scrots/emote_demo.png" width=400/> <br>
+<img src="scrots/shibe_demo.png" width=400/> <br>
+<img src="scrots/birb_demo.png" width=400/>
