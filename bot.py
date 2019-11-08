@@ -106,11 +106,14 @@ async def addEmote(ctx, emote_name: str):
         
     vote_passed = await take_vote(ctx, "Add emoji `{}`?".format(emote_name), EMOTE_VOTE_TIME, MIN_EMOTE_VOTERS)
 
-    # if all_in_favor > not_in_favor and all_in_favor > MIN_EMOTE_VOTERS:
-    await ctx.send(embed=imgfun(msg, url))
     if vote_passed:
-        file_bytes = await ctx.message.attachments[0].read()
-        await ctx.guild.create_custom_emoji(name=emote_name, image=file_bytes)
+        try:
+            file_bytes = await ctx.message.attachments[0].read()
+            await ctx.guild.create_custom_emoji(name=emote_name, image=file_bytes)
+            await ctx.send("`Emote {0} added!` :{0}:".format(emote_name))
+        except:
+            await ctx.send(":warning: `There was an error adding emote {}.`".format(emote_name))
+
 
 @bot.command()
 async def shibe(ctx):
