@@ -1,8 +1,20 @@
-Karl Marx 2
-===========
+<center>☭ Comrade Bot ☭</center>
+===
 
 Usage Philosophy
-----------------
-Karl Marx 2 hands the controls back to the users themselves. Instead of a few moderators or an administrator choosing what the server needs, these types of choices are now left up to the whole of the server. Do you want a custom emoji? Is the someone being toxic enough to be kicked/banned? Let's take a vote! 
+---
 
-<!--<center><img src="mute_demo.png" width=400/></center>-->
+Meet Comrade, a discord bot who hands decision-making power back to the users themselves. Instead of a few moderators or an administrator choosing what your server needs, choices of this sort are now left up to the people. Do you want a custom emoji? Does someone need to be kicked or banned? Take a vote!
+
+Comrade also has a couple of cute image commands, providing easy access to shibe or birb photos.
+
+Invite Comrade!
+---
+<a href="">Invite Link</a>
+
+Screenshots
+---
+
+<center><img src="scrots/emote_demo.png" width=400/></center><br>
+<center><img src="scrots/shibe_demo.png" width=400/></center><br>
+<center><img src="scrots/birb_demo.png" width=400/></center>
