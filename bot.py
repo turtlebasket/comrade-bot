@@ -29,6 +29,8 @@ MIN_BAN_VOTERS = config["MIN_BAN_VOTERS"]
 EMOTE_VOTE_TIME = config["EMOTE_VOTE_TIME"]
 MIN_EMOTE_VOTERS = config["MIN_EMOTE_VOTERS"]
 
+STATUS_LOOP = config["STATUS_LOOP"]
+
 bot = commands.Bot(command_prefix='>>')
 bot.remove_command('help')
 
@@ -38,9 +40,17 @@ muting_users = []
 kicking_users = []
 banning_users = []
 
+async def status_loop():
+    while True:
+        await bot.change_presence(activity=discord.Game(name='{} servers | >>help'.format(len(bot.guilds))))
+        await asyncio.sleep(STATUS_LOOP)
+        await bot.change_presence(activity=discord.Game(name='Communist Revolution 2: Electric Boogaloo'.format(len(bot.guilds))))
+        await asyncio.sleep(STATUS_LOOP)
+
 @bot.event
 async def on_ready():
-    await bot.change_presence(activity=discord.Game(name='{} servers | >>help'.format(len(bot.guilds))))
+    # await bot.change_presence(activity=discord.Game(name='{} servers | >>help'.format(len(bot.guilds))))
+    bot.loop.create_task(status_loop())
     print("Bot started.")
     print("--------------------------")
 
@@ -91,6 +101,7 @@ async def addEmote(ctx, emote_name: str):
 
     Hold a vote to add an emoji.
     """
+
     filename = str(ctx.message.attachments[0].filename)
     valid_exts = [".jpg", ".jpeg", ".png", ".gif"]
     valid = False
