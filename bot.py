@@ -42,17 +42,14 @@ banning_users = []
 
 async def status_loop():
     while True:
-        member_total = 0
-        for s in bot.guilds:
-            member_total += len(s.members)
-        await bot.change_presence(activity=discord.Game(name='{0} users in {1} servers'.format(member_total, len(bot.guilds))))
+        await bot.change_presence(activity=discord.Game(name='{0} users in {1} servers'.format(len(bot.users), len(bot.guilds))))
         await asyncio.sleep(STATUS_LOOP)
 
-        # await bot.change_presence(activity=discord.Game(name='{} servers | >>help'.format(len(bot.guilds))))
-        await bot.change_presence(activity=discord.Game(name='`>>help` me'.format(len(bot.guilds))))
+        await bot.change_presence(activity=discord.Game(name='>>help'.format(len(bot.guilds))))
         await asyncio.sleep(STATUS_LOOP)
-        # await bot.change_presence(activity=discord.Game(name='Communist Revolution 2: Electric Boogaloo'.format(len(bot.guilds))))
-        # await asyncio.sleep(STATUS_LOOP)
+
+        await bot.change_presence(activity=discord.Game(name='Communist Revolution 2: Electric Boogaloo'.format(len(bot.guilds))))
+        await asyncio.sleep(STATUS_LOOP)
 
 @bot.event
 async def on_ready():
