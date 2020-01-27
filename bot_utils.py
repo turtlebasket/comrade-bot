@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 import asyncio
 
-async def take_vote(ctx, question:str, wait_time, min_voters):
+async def take_vote(ctx, question:str, vote_time, min_voters):
 
     """
     take_vote(ctx, question:str) - Collects votes
@@ -13,6 +13,7 @@ async def take_vote(ctx, question:str, wait_time, min_voters):
     returns [<all who want>, <all who don't want>]. 
     It's up to the context/use case to decide how these should be used.
     """
+
     embed_title="NEW VOTE"
     votey_message = await ctx.send(
         embed=discord.Embed(
@@ -26,24 +27,32 @@ async def take_vote(ctx, question:str, wait_time, min_voters):
     await votey_message.add_reaction('✅')
     await votey_message.add_reaction('❌')
 
-    await asyncio.sleep(wait_time)
+    # TODO: Short-circuit eval loop, old stuff temp commented
+    # await asyncio.sleep(vote_time)
 
-    finished_votey = await votey_message.channel.fetch_message(votey_message.id)
-    all_in_favor = 0
-    not_in_favor = 0
-    for reaction in finished_votey.reactions:
-        if str(reaction.emoji) == '✅':
-            all_in_favor += reaction.count-1 # don't include bot's reaction
-        if str(reaction.emoji) == '❌':
-            not_in_favor += reaction.count-1
 
-    # await ctx.send(embed=discord.Embed(type='rich', title="VOTE RESULTS", description="✅ - {0}\n\n❌ - {1}\n".format(all_in_favor, not_in_favor)))
     passed = False
-    if all_in_favor > not_in_favor and all_in_favor >= min_voters:
-        question += "\nVERDICT: **Vote passed!**"
-        passed = True
-    else:
-        question += "\nVERDICT: **Vote failed!**"
+    curr_time = 0
+    while curr_time < vote_time:
+        await asyncio.sleep(5)
+        all_in_favor = 0
+        not_in_favor = 0
+        finished_votey = await votey_message.channel.fetch_message(votey_message.id)
+        for reaction in finished_votey.reactions:
+            if str(reaction.emoji) == '✅':
+                all_in_favor += reaction.count-1 # don't include bot's reaction
+            elif str(reaction.emoji) == '❌':
+                not_in_favor += reaction.count-1
+
+        print("check ({0} ✅, {1} ❌)".format(all_in_favor, not_in_favor))
+        if all_in_favor > not_in_favor and all_in_favor >= min_voters:
+            passed = True
+            break
+
+        await asyncio.sleep(5)
+        curr_time += 5
+
+    question += "\nVERDICT: **Vote passed!**" if passed else "\nVERDICT: **Vote failed!**"
 
     await votey_message.edit(embed=discord.Embed(
         type="rich",
