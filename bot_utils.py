@@ -27,10 +27,6 @@ async def take_vote(ctx, question:str, vote_time, min_voters):
     await votey_message.add_reaction('✅')
     await votey_message.add_reaction('❌')
 
-    # TODO: Short-circuit eval loop, old stuff temp commented
-    # await asyncio.sleep(vote_time)
-
-
     passed = False
     curr_time = 0
     while curr_time < vote_time:
@@ -44,7 +40,6 @@ async def take_vote(ctx, question:str, vote_time, min_voters):
             elif str(reaction.emoji) == '❌':
                 not_in_favor += reaction.count-1
 
-        print("check ({0} ✅, {1} ❌)".format(all_in_favor, not_in_favor))
         if all_in_favor > not_in_favor and all_in_favor >= min_voters:
             passed = True
             break

@@ -1,5 +1,5 @@
 {
-	"MUTE_VOTE_TIME" : 30,
+	"MUTE_VOTE_TIME" : 60,
 	"MIN_MUTE_VOTERS" : 4,
 	"MUTE_TIME" : 600,
 

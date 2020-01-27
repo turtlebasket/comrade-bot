@@ -42,13 +42,16 @@ banning_users = []
 
 async def status_loop():
     while True:
-        await bot.change_presence(activity=discord.Game(name='{0} users in {1} servers'.format(len(bot.users), len(bot.guilds))))
+        await bot.change_presence(activity=discord.Game(name='Serving {0} glorious servers'.format(len(bot.guilds))))
         await asyncio.sleep(STATUS_LOOP)
 
         await bot.change_presence(activity=discord.Game(name='>>help'.format(len(bot.guilds))))
         await asyncio.sleep(STATUS_LOOP)
 
-        await bot.change_presence(activity=discord.Game(name='Communist Revolution 2: Electric Boogaloo'.format(len(bot.guilds))))
+        await bot.change_presence(activity=discord.Game(name='Proletarian Uprising 2: Electric Boogaloo'.format(len(bot.guilds))))
+        await asyncio.sleep(STATUS_LOOP)
+
+        await bot.change_presence(activity=discord.Game(name='Want to contribute? Have an issue? https://github.com/turtlebasket/comrade-bot'))
         await asyncio.sleep(STATUS_LOOP)
 
 @bot.event
@@ -63,32 +66,48 @@ async def help(ctx):
     embed = discord.Embed(title="How 2 Comrade")
     embed.add_field(
         name=">>addEmote <emoji name>",
-        value="hold a {0}-second vote on whether or not to add a given emote (provided as a message attachment).".format(EMOTE_VOTE_TIME)
+        value=
+            """Vote to add a new emoji.
+            Vote time: {0} minutes
+            Minimum Voters: {1}
+            """.format(int(EMOTE_VOTE_TIME/60), MIN_EMOTE_VOTERS)
     )
 
     embed.add_field(
         name=">>mute <user>",
-        value="Hold a {0}-second vote to mute a user for {1} minutes (minimum voters: {2}, over 50% majority required).".format(MUTE_VOTE_TIME, int(MUTE_TIME/60), MIN_MUTE_VOTERS)
+        value=
+            """Vote to mute user for {0} minutes.
+            Vote time: {1} minutes
+            Minimum Voters: {2}
+            """.format(int(MUTE_TIME/60), int(MUTE_VOTE_TIME/60), MIN_MUTE_VOTERS)
     )
 
     embed.add_field(
         name=">>kick <user>",
-        value="Kick user. The vote is up for {0} minutes, and requires that a minimum of {1} users and >50% approve.".format(int(KICK_VOTE_TIME/60), MIN_KICK_VOTERS)
+        value=
+            """Vote to kick user.
+            Vote Time: {0} minutes
+            Minimum Voters: {1}
+            """.format(int(KICK_VOTE_TIME/60), MIN_KICK_VOTERS)
     )
 
     embed.add_field(
         name=">>ban <user>",
-        value="Ban user. By default, the vote lasts {0} minutes, and requires that there be at least {1} votes and a 50% majority.".format(int(BAN_VOTE_TIME/60), MIN_BAN_VOTERS)
+        value=
+            """Vote to ban user.
+            Vote Time: {1} minutes
+            Minimum Voters: {1}
+            """.format(int(BAN_VOTE_TIME/60), MIN_BAN_VOTERS)
     )
 
     embed.add_field(
         name=">>shibe",
-        value="shibe :dog: :eyes:"
+        value="Random shibe :dog: :eyes:"
     )
 
     embed.add_field(
         name=">>birb",
-        value="birb :bird: :hatching_chick:"
+        value="Random birb :bird: :hatching_chick:"
     )
     
     embed.add_field(
