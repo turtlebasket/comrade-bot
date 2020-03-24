@@ -9,6 +9,7 @@ from urllib.request import urlopen, Request
 import random
 import discord
 from discord.ext import commands
+from os import environ
 from bot_utils import *
 
 # I know, config parsing is ugly and bad, I'll get around to refactoring later TwT
@@ -246,4 +247,5 @@ async def ban(ctx, target_user:discord.User):
 
     banning_users.remove(target_user)
 
-bot.run(open("token.txt").read().strip())
+# bot.run(open("token.txt").read().strip())
+bot.run(environ["BOT_TOKEN"])
