@@ -247,5 +247,4 @@ async def ban(ctx, target_user:discord.User):
 
     banning_users.remove(target_user)
 
-# bot.run(open("token.txt").read().strip())
-bot.run(environ["BOT_TOKEN"])
+bot.run(open("token.txt").read().strip())
