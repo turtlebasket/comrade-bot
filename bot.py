@@ -52,9 +52,6 @@ async def status_loop():
         await bot.change_presence(activity=discord.Game(name='Proletarian Uprising 2: Electric Boogaloo'.format(len(bot.guilds))))
         await asyncio.sleep(STATUS_LOOP)
 
-        await bot.change_presence(activity=discord.Game(name='Want to contribute? Have an issue? https://github.com/turtlebasket/comrade-bot'))
-        await asyncio.sleep(STATUS_LOOP)
-
 @bot.event
 async def on_ready():
     # await bot.change_presence(activity=discord.Game(name='{} servers | >>help'.format(len(bot.guilds))))
@@ -115,6 +112,12 @@ async def help(ctx):
         name=">>ping",
         value="Get bot latency."
     )
+
+    embed.add_field(
+        name="Need help or having an issue?",
+        value="Report an issue at: https://github.com/turtlebasket/comrade-bot/issues/new"
+    )
+
     await ctx.send(embed=embed)
 
 
