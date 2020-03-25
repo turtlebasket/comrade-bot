@@ -190,16 +190,16 @@ async def mute(ctx, target_user:discord.User):
     if vote_passed:
         # Add to muted_users
         muted_users.append(target_user)
-        # add temp. role for mute
+        # add temp. role for mute, edit role position to take precedence over other roles
         muted_role = await ctx.guild.create_role(name="Muted")
-        # edit role position to take precedence over other roles
         await muted_role.edit(position=ctx.guild.get_member(target_user.id).top_role.position+1)
+
         # change channel permissions for new role
         for channel in ctx.guild.channels:
-            if channel is discord.TextChannel and target_user in channel.members:
+            if type(channel) is discord.TextChannel and target_user in channel.members:
                 await channel.set_permissions(muted_role, read_messages=True, send_messages=False, add_reactions=False)
 
-            elif channel is discord.VoiceChannel:
+            elif type(channel) is discord.VoiceChannel:
                 await channel.set_permissions(muted_role, connect=False)
 
         # Give role to member
