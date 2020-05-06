@@ -74,9 +74,9 @@ async def on_ready():
     print("Bot started.")
     print("--------------------------")
 
-@bot.command(aliases=['manual', 'commands'])
+@bot.command(aliases=['manual', 'commands', 'info'])
 async def help(ctx):
-    embed = discord.Embed(title="How 2 Comrade")
+    embed = discord.Embed(title="Comrade: Usage & Other Info")
     embed.add_field(
         name=">>addEmote <emoji name>",
         value=
@@ -129,8 +129,13 @@ async def help(ctx):
     )
 
     embed.add_field(
-        name="Need help or having an issue?",
-        value="Report an issue at: https://github.com/turtlebasket/comrade-bot/issues/new"
+        name="Enjoying Comrade?",
+        value="[Upvote Comrade on Discord Bot List!](https://top.gg/bot/592852914553487370/vote)"
+    )
+
+    embed.add_field(
+        name="Need help?",
+        value="[Report an issue](https://github.com/turtlebasket/comrade-bot/issues)"
     )
 
     await ctx.send(embed=embed)
