@@ -109,3 +109,4 @@ venv.bak/
 # muh token is stored as plain text ehehehehe
 token.txt
 config.json
+token.json
