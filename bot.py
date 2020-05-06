@@ -43,13 +43,13 @@ banning_users = []
 
 async def status_loop():
     while True:
-        await bot.change_presence(activity=discord.Game(name='Serving {0} glorious servers'.format(len(bot.guilds))))
+        await bot.change_presence(activity=discord.Game(name="Serving {0} glorious servers".format(len(bot.guilds))))
         await asyncio.sleep(STATUS_LOOP)
 
-        await bot.change_presence(activity=discord.Game(name='>>help'.format(len(bot.guilds))))
+        await bot.change_presence(activity=discord.Game(name=">>help"))
         await asyncio.sleep(STATUS_LOOP)
 
-        await bot.change_presence(activity=discord.Game(name='Proletarian Uprising 2: Electric Boogaloo'.format(len(bot.guilds))))
+        await bot.change_presence(activity=discord.Game(name="Proletarian Uprising 2: Electric Boogaloo"))
         await asyncio.sleep(STATUS_LOOP)
 
 @bot.event
@@ -93,7 +93,7 @@ async def help(ctx):
         name=">>ban <user>",
         value=
             """Vote to ban user.
-            Vote Time: {1} minutes
+            Vote Time: {0} minutes
             Minimum Voters: {1}
             """.format(int(BAN_VOTE_TIME/60), MIN_BAN_VOTERS)
     )
