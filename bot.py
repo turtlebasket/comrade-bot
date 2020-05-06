@@ -10,13 +10,16 @@ import random
 import discord
 from discord.ext import commands
 from os import environ
+import dbl
 from bot_utils import *
-
-# I know, config parsing is ugly and bad, I'll get around to refactoring later TwT
 
 with open('config.json', 'r') as json_file:
     config = json.load(json_file)
 
+with open('tokens.json', 'r') as tokens_file:
+    tokens = json.load(tokens_file)
+
+# Feeling cute, might refactor later
 MUTE_VOTE_TIME = config["MUTE_VOTE_TIME"]
 MIN_MUTE_VOTERS = config["MIN_MUTE_VOTERS"] # should be 3
 MUTE_TIME = config["MUTE_TIME"] # 10 mins
@@ -51,6 +54,18 @@ async def status_loop():
 
         await bot.change_presence(activity=discord.Game(name="Proletarian Uprising 2: Electric Boogaloo"))
         await asyncio.sleep(STATUS_LOOP)
+
+
+# top.gg API interaction handling (boilerplate);
+class TopGG(commands.Cog):
+    """Handles interactions with the top.gg API"""
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.token = tokens["dbl_token"]
+        self.dblpy = dbl.DBLClient(self.bot, self.token, autopost=True) # refresh guild count every 30 mins 
+
+bot.add_cog(TopGG(bot))
 
 @bot.event
 async def on_ready():
@@ -250,4 +265,4 @@ async def ban(ctx, target_user:discord.User):
 
     banning_users.remove(target_user)
 
-bot.run(open("token.txt").read().strip())
+bot.run(tokens["bot_token"])

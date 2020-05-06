@@ -1,1 +1,2 @@
 discord.py >= 1.2.0
+dblpy >= 0.3.4
