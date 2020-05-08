@@ -141,7 +141,7 @@ async def help(ctx):
     await ctx.send(embed=embed)
 
 
-@bot.command(aliases=['addEmoji'])
+@bot.command(aliases=['addemote', 'addemoji', 'addEmoji'])
 async def addEmote(ctx, emote_name: str):
     """
     command: addEmote
