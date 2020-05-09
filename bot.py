@@ -77,17 +77,17 @@ async def on_ready():
 @bot.command(aliases=['manual', 'commands', 'info'])
 async def help(ctx):
     embed = discord.Embed(title="Comrade: Usage & Other Info")
-    embed.add_field(
-        name=">>addEmote <emoji name>",
+    embed.add_field(inline=False,
+        name="`>>addEmote` <emoji name> [ATTACHED IMAGE]",
         value=
-            """Vote to add a new emoji.
+            """Vote to add a new emoji, attached as JPEG, PNG or GIF image.
             Vote time: {0} minutes
             Minimum Voters: {1}
             """.format(int(EMOTE_VOTE_TIME/60), MIN_EMOTE_VOTERS)
     )
 
-    embed.add_field(
-        name=">>mute <user>",
+    embed.add_field(inline=False,
+        name="`>>mute` <user>",
         value=
             """Vote to mute user for {0} minutes.
             Vote time: {1} minutes
@@ -95,8 +95,8 @@ async def help(ctx):
             """.format(int(MUTE_TIME/60), int(MUTE_VOTE_TIME/60), MIN_MUTE_VOTERS)
     )
 
-    embed.add_field(
-        name=">>kick <user>",
+    embed.add_field(inline=False,
+        name="`>>kick` <user>",
         value=
             """Vote to kick user.
             Vote Time: {0} minutes
@@ -104,8 +104,8 @@ async def help(ctx):
             """.format(int(KICK_VOTE_TIME/60), MIN_KICK_VOTERS)
     )
 
-    embed.add_field(
-        name=">>ban <user>",
+    embed.add_field(inline=False,
+        name="`>>ban` <user>",
         value=
             """Vote to ban user.
             Vote Time: {0} minutes
@@ -113,27 +113,27 @@ async def help(ctx):
             """.format(int(BAN_VOTE_TIME/60), MIN_BAN_VOTERS)
     )
 
-    embed.add_field(
-        name=">>shibe",
+    embed.add_field(inline=False,
+        name="`>>shibe`",
         value="Random shibe :dog: :eyes:"
     )
 
-    embed.add_field(
-        name=">>birb",
+    embed.add_field(inline=False,
+        name="`>>birb`",
         value="Random birb :bird: :hatching_chick:"
     )
     
-    embed.add_field(
-        name=">>ping",
+    embed.add_field(inline=False,
+        name="`>>ping`",
         value="Get bot latency."
     )
 
-    embed.add_field(
+    embed.add_field(inline=False,
         name="Enjoying Comrade?",
         value="[Upvote Comrade on Discord Bot List!](https://top.gg/bot/592852914553487370/vote)"
     )
 
-    embed.add_field(
+    embed.add_field(inline=False,
         name="Need help?",
         value="[Report an issue](https://github.com/turtlebasket/comrade-bot/issues)"
     )
