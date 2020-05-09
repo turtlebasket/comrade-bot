@@ -7,7 +7,7 @@ A communism-inspired discord bot who wants you to vote on everything.
 <a href="https://top.gg/bot/592852914553487370" >
   <img src="https://top.gg/api/widget/592852914553487370.svg" alt="Comrade" />
 </a>
-<a href="https://discordapp.com/oauth2/authorize?client_id=592852914553487370&scope=bot&permissions=1413515334"><h3>Invite Comrade!</h3></a>
+<h3><a href="https://discordapp.com/oauth2/authorize?client_id=592852914553487370&scope=bot&permissions=1413515334">Invite Comrade!</a></h3>
 </div>
 
 About/Design Philosophy
