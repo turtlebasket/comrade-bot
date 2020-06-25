@@ -1,5 +1,9 @@
 """
-Karl Marx 2
+  _____                       __      ___       __ 
+ / ___/__  __ _  _______ ____/ /__   / _ )___  / /_
+/ /__/ _ \/  ' \/ __/ _ `/ _  / -_) / _  / _ \/ __/
+\___/\___/_/_/_/_/  \_,_/\_,_/\__/ /____/\___/\__/ 
+
 A bot by turtlebasket
 """
 
@@ -56,7 +60,7 @@ async def status_loop():
         await asyncio.sleep(STATUS_LOOP)
 
 
-# top.gg API interaction handling (boilerplate);
+# top.gg API interaction handling (boilerplate)
 class TopGG(commands.Cog):
     """Handles interactions with the top.gg API"""
 
@@ -65,12 +69,21 @@ class TopGG(commands.Cog):
         self.token = tokens["dbl_token"]
         self.dblpy = dbl.DBLClient(self.bot, self.token, autopost=True) # refresh guild count every 30 mins 
 
-bot.add_cog(TopGG(bot))
+    @tasks.loop(minutes=30.0)
+    async def update_stats(self):
+        """Automatically update server count"""
+        try:
+            await self.dblpy.post_guild_count()
+        except Exception as e:
+            print('Failed to post server count\n{}: {}'.format(type(e).__name__, e))
+
+        # await asyncio.sleep(1800)
 
 @bot.event
 async def on_ready():
     # await bot.change_presence(activity=discord.Game(name='{} servers | >>help'.format(len(bot.guilds))))
     bot.loop.create_task(status_loop())
+    bot.add_cog(TopGG(bot))
     print("Bot started.")
     print("--------------------------")
 
