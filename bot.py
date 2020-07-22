@@ -1,4 +1,4 @@
-"""
+r"""
   _____                       __   
  / ___/__  __ _  _______ ____/ /__ 
 / /__/ _ \/  ' \/ __/ _ `/ _  / -_)
@@ -83,10 +83,12 @@ class TopGG(commands.Cog):
 @bot.event
 async def on_ready():
     # await bot.change_presence(activity=discord.Game(name='{} servers | >>help'.format(len(bot.guilds))))
-    bot.loop.create_task(status_loop())
     bot.add_cog(TopGG(bot))
     print("Bot started.")
     print("--------------------------")
+
+    await asyncio.sleep(300)
+    bot.loop.create_task(status_loop())
 
 @bot.command(aliases=['manual', 'commands', 'info'])
 async def help(ctx):
@@ -252,6 +254,7 @@ async def mute(ctx, target_user:discord.User):
             muted_users.remove(target_user)
         except discord.ext.commands.errors.CommandInvokeError:
             await error_admin_targeted(ctx)
+            muted_users.remove(target_user)
 
 @bot.command()
 async def kick(ctx, target_user:discord.User):
@@ -270,6 +273,7 @@ async def kick(ctx, target_user:discord.User):
     if vote_passed:
         try:
             await ctx.guild.kick(target_user)
+            await ctx.send("👢 Kicked `{}`.".format(target_user))
         except discord.ext.commands.errors.CommandInvokeError:
             await error_admin_targeted(ctx)
 
@@ -293,7 +297,7 @@ async def ban(ctx, target_user:discord.User):
     if vote_passed:
         try:
             await ctx.guild.ban(target_user)
-            await ctx.send(":crab: :crab: `{}` IS GONE :crab: :crab:".format(target_user.name))
+            await ctx.send("🦀🦀 `{}` IS GONE 🦀🦀".format(target_user.name))
         except discord.ext.commands.errors.CommandInvokeError:
             await error_admin_targeted(ctx)
 
