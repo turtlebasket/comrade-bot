@@ -227,28 +227,31 @@ async def mute(ctx, target_user:discord.User):
     muting_users.remove(target_user)
 
     if vote_passed:
-        # Add to muted_users
-        muted_users.append(target_user)
-        # add temp. role for mute, edit role position to take precedence over other roles
-        muted_role = await ctx.guild.create_role(name="Muted")
-        await muted_role.edit(position=ctx.guild.get_member(target_user.id).top_role.position+1)
+        try:
+            # Add to muted_users
+            muted_users.append(target_user)
+            # add temp. role for mute, edit role position to take precedence over other roles
+            muted_role = await ctx.guild.create_role(name="Muted")
+            await muted_role.edit(position=ctx.guild.get_member(target_user.id).top_role.position+1)
 
-        # change channel permissions for new role
-        for channel in ctx.guild.channels:
-            if type(channel) is discord.TextChannel and target_user in channel.members:
-                await channel.set_permissions(muted_role, read_messages=True, send_messages=False, add_reactions=False)
+            # change channel permissions for new role
+            for channel in ctx.guild.channels:
+                if type(channel) is discord.TextChannel and target_user in channel.members:
+                    await channel.set_permissions(muted_role, read_messages=True, send_messages=False, add_reactions=False)
 
-            elif type(channel) is discord.VoiceChannel:
-                await channel.set_permissions(muted_role, connect=False)
+                elif type(channel) is discord.VoiceChannel:
+                    await channel.set_permissions(muted_role, connect=False)
 
-        # Give role to member
-        await ctx.guild.get_member(target_user.id).add_roles(muted_role)
-        await ctx.send("**{0}, the majority has ruled that you should be muted.** See ya in {1} minutes!".format(target_user, int(MUTE_TIME/60)))
-        await asyncio.sleep(MUTE_TIME)
-        await muted_role.delete()
+            # Give role to member
+            await ctx.guild.get_member(target_user.id).add_roles(muted_role)
+            await ctx.send("**{0}, the majority has ruled that you should be muted.** See ya in {1} minutes!".format(target_user, int(MUTE_TIME/60)))
+            await asyncio.sleep(MUTE_TIME)
+            await muted_role.delete()
 
-        # Remove from muted_users
-        muted_users.remove(target_user)
+            # Remove from muted_users
+            muted_users.remove(target_user)
+        except discord.ext.commands.errors.CommandInvokeError:
+            await error_admin_targeted(ctx)
 
 @bot.command()
 async def kick(ctx, target_user:discord.User):
@@ -265,7 +268,10 @@ async def kick(ctx, target_user:discord.User):
     vote_passed = await take_vote(ctx, "Kick `{}`?".format(target_user), KICK_VOTE_TIME, MIN_KICK_VOTERS)
 
     if vote_passed:
-        await ctx.guild.kick(target_user)
+        try:
+            await ctx.guild.kick(target_user)
+        except discord.ext.commands.errors.CommandInvokeError:
+            await error_admin_targeted(ctx)
 
     kicking_users.remove(target_user)
 
@@ -285,8 +291,12 @@ async def ban(ctx, target_user:discord.User):
     vote_passed = await take_vote(ctx, "Ban `{}`?".format(target_user), BAN_VOTE_TIME, MIN_BAN_VOTERS)
 
     if vote_passed:
-        await ctx.guild.ban(target_user)
-        await ctx.send(":crab: :crab: `{}` IS GONE :crab: :crab:".format(target_user.name))
+        try:
+            await ctx.guild.ban(target_user)
+            await ctx.send(":crab: :crab: `{}` IS GONE :crab: :crab:".format(target_user.name))
+        except discord.ext.commands.errors.CommandInvokeError:
+            await error_admin_targeted(ctx)
+
 
     banning_users.remove(target_user)
 
