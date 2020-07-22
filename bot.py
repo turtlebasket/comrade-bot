@@ -1,8 +1,8 @@
 """
-  _____                       __      ___       __ 
- / ___/__  __ _  _______ ____/ /__   / _ )___  / /_
-/ /__/ _ \/  ' \/ __/ _ `/ _  / -_) / _  / _ \/ __/
-\___/\___/_/_/_/_/  \_,_/\_,_/\__/ /____/\___/\__/ 
+  _____                       __   
+ / ___/__  __ _  _______ ____/ /__ 
+/ /__/ _ \/  ' \/ __/ _ `/ _  / -_)
+\___/\___/_/_/_/_/  \_,_/\_,_/\__/ 
 
 A bot by turtlebasket
 """
@@ -213,6 +213,8 @@ async def ping(ctx):
 @bot.command()
 async def mute(ctx, target_user:discord.User):
 
+    await require_lower_permissions(ctx, target_user, bot)
+
     if target_user in muting_users:
         await ctx.send("There is already a mute vote on `{}`!".format(target_user))
         return
@@ -251,6 +253,8 @@ async def mute(ctx, target_user:discord.User):
 @bot.command()
 async def kick(ctx, target_user:discord.User):
 
+    await require_lower_permissions(ctx, target_user, bot)
+
     if target_user in kicking_users:
         await ctx.send("There is already a kick vote on `{}`!".format(target_user))
         return 
@@ -269,6 +273,8 @@ async def kick(ctx, target_user:discord.User):
 @bot.command(aliases=['exile'])
 async def ban(ctx, target_user:discord.User):
 
+    await require_lower_permissions(ctx, target_user, bot)
+
     if target_user in banning_users:
         await ctx.send("There is already a ban vote on `{}`!".format(target_user))
         return 
@@ -283,5 +289,10 @@ async def ban(ctx, target_user:discord.User):
         await ctx.send(":crab: :crab: `{}` IS GONE :crab: :crab:".format(target_user.name))
 
     banning_users.remove(target_user)
+
+@bot.command()
+async def test(ctx, target_user:discord.User):
+    await require_lower_permissions(ctx, target_user, bot)
+    await ctx.send("success")
 
 bot.run(tokens["bot_token"])

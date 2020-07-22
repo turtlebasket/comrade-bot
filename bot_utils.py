@@ -56,8 +56,24 @@ async def take_vote(ctx, question:str, vote_time, min_voters):
     ))
     return passed
 
-async def improper_usage(ctx):
-    await ctx.send("Improper command usage! See `>>help` for more.")
+class CommandBreakerException(Exception):
+    pass
+
+async def error_invalid_usage(ctx):
+    await ctx.send("⚠ `Invalid command usage! See `>>help` for more.`")
+
+async def error_admin_targeted(ctx):
+    await ctx.send("⚠ `Cannot perform this action on adminstrators or users with a higher or equal role.`")
+
+async def require_lower_permissions(ctx, user:discord.User, bot:discord.ext.commands.Bot):
+    memb = await ctx.guild.fetch_member(user.id)
+    bot_memb = await ctx.guild.fetch_member(bot.user.id)
+    is_admin = memb.permissions_in(ctx.channel).administrator
+    is_higher = memb.top_role.position >= bot_memb.top_role.position
+
+    if is_admin or is_higher:
+        await error_admin_targeted(ctx)
+        raise CommandBreakerException
 
 def imgfun(msg:str, img_url:str):
     return discord.Embed(
