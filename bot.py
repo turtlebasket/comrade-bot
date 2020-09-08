@@ -207,6 +207,16 @@ async def birb(ctx):
         # insert image filename into URL
         url="http://random.birb.pw/img/{}".format(json.loads(birb_contents)["file"])
     await ctx.send(embed=imgfun(msg, url))
+
+@bot.command(aliases=['kitty', 'kitti'])
+async def cat(ctx):
+    with urlopen(Request(url="http://aws.random.cat/meow", headers={'User-Agent': 'Mozilla/5.0'})) as json_return:
+        # get image filename
+        cat_contents = json_return.read()
+        msg="{0}, here is your random cat:".format(ctx.message.author.name)
+        # insert image filename into URL
+        url=json.loads(cat_contents)["file"]
+    await ctx.send(embed=imgfun(msg, url))
     
 @bot.command(aliases=['latency'])
 async def ping(ctx):
