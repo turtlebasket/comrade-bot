@@ -24,7 +24,7 @@ Basic Commands
 - `>>kick` - Hold a vote to kick a member.
 - `>>ban` - Hold a vote to ban a member.
 - `>>addEmote` - Hold a vote to add a proposed server emote (attached to your message as an image).
-- `>>shibe`, `>>birb` - Post an image of the given entity in the current channel.
+- `>>shibe`, `>>birb`, `>>cat` - Post an image of the given entity in the current channel.
 - `>>ping` - Test bot's server latency
 
 <hr>

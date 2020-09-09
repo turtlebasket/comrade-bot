@@ -135,6 +135,11 @@ async def help(ctx):
     )
 
     embed.add_field(inline=False,
+        name="`>>cat`",
+        value="Random cat :cat: :cat2:"
+    )
+
+    embed.add_field(inline=False,
         name="`>>birb`",
         value="Random birb :bird: :hatching_chick:"
     )
