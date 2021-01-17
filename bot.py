@@ -230,7 +230,7 @@ async def ping(ctx):
 @bot.command()
 async def mute(ctx, target_user:discord.User):
 
-    await require_lower_permissions(ctx, target_user, bot)
+    # await require_lower_permissions(ctx, target_user, bot)
 
     if target_user in muting_users:
         await ctx.send("There is already a mute vote on `{}`!".format(target_user))
@@ -240,7 +240,7 @@ async def mute(ctx, target_user:discord.User):
         return
 
     muting_users.append(target_user)
-    vote_passed = await take_vote(ctx, "Mute `{}`?".format(target_user), MUTE_VOTE_TIME, MIN_MUTE_VOTERS)
+    vote_passed = await take_vote(ctx, "Mute `{}`?\n⚠ NOTE: Can't mute users with an equal or higher role.".format(target_user), MUTE_VOTE_TIME, MIN_MUTE_VOTERS)
     muting_users.remove(target_user)
 
     if vote_passed:
@@ -274,7 +274,7 @@ async def mute(ctx, target_user:discord.User):
 @bot.command()
 async def kick(ctx, target_user:discord.User):
 
-    await require_lower_permissions(ctx, target_user, bot)
+    # await require_lower_permissions(ctx, target_user, bot)
 
     if target_user in kicking_users:
         await ctx.send("There is already a kick vote on `{}`!".format(target_user))
@@ -283,7 +283,7 @@ async def kick(ctx, target_user:discord.User):
     # add to kicking_users
     kicking_users.append(target_user)
 
-    vote_passed = await take_vote(ctx, "Kick `{}`?".format(target_user), KICK_VOTE_TIME, MIN_KICK_VOTERS)
+    vote_passed = await take_vote(ctx, "Kick `{}`?\n⚠ NOTE: Can't kick users with an equal or higher role.".format(target_user), KICK_VOTE_TIME, MIN_KICK_VOTERS)
 
     if vote_passed:
         try:
@@ -298,7 +298,7 @@ async def kick(ctx, target_user:discord.User):
 @bot.command(aliases=['exile'])
 async def ban(ctx, target_user:discord.User):
 
-    await require_lower_permissions(ctx, target_user, bot)
+    # await require_lower_permissions(ctx, target_user, bot)
 
     if target_user in banning_users:
         await ctx.send("There is already a ban vote on `{}`!".format(target_user))
@@ -307,7 +307,7 @@ async def ban(ctx, target_user:discord.User):
     # add to banning_users
     banning_users.append(target_user)
 
-    vote_passed = await take_vote(ctx, "Ban `{}`?".format(target_user), BAN_VOTE_TIME, MIN_BAN_VOTERS)
+    vote_passed = await take_vote(ctx, "Ban `{}`?\n⚠ NOTE: Can't ban users with an equal or higher role.".format(target_user), BAN_VOTE_TIME, MIN_BAN_VOTERS)
 
     if vote_passed:
         try:
