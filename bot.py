@@ -18,11 +18,17 @@ from os import environ
 import dbl
 from bot_utils import *
 
+from dotenv import load_dotenv
+from os import path, getenv
+
+basedir = path.abspath(path.dirname(__file__))
+load_dotenv()
+
 with open('config.json', 'r') as json_file:
     config = json.load(json_file)
 
-with open('tokens.json', 'r') as tokens_file:
-    tokens = json.load(tokens_file)
+BOT_TOKEN = getenv('BOT_TOKEN')
+DBL_TOKEN = getenv('DBL_TOKEN')
 
 # Feeling cute, might refactor later
 MUTE_VOTE_TIME = config["MUTE_VOTE_TIME"]
@@ -67,7 +73,7 @@ class TopGG(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.token = tokens["dbl_token"]
+        self.token = DBL_TOKEN
         self.dblpy = dbl.DBLClient(self.bot, self.token, autopost=True) # refresh guild count every 30 mins 
 
     @tasks.loop(minutes=30.0)
@@ -324,4 +330,4 @@ async def test(ctx, target_user:discord.User):
     await require_lower_permissions(ctx, target_user, bot)
     await ctx.send("success")
 
-bot.run(tokens["bot_token"])
+bot.run(BOT_TOKEN)
