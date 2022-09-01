@@ -10,6 +10,11 @@ A communism-inspired discord bot who wants you to vote on everything.
 <h3><a href="https://discordapp.com/oauth2/authorize?client_id=592852914553487370&scope=bot&permissions=1413515334">Invite Comrade!</a></h3>
 </div>
 
+⚠️ DEPRECATION NOTICE
+---
+
+Discord has made breaking API changes that make this bot no longer able to read user commands, instead requiring that bots use slash commands. The Discord API wrapper used by Comrade Bot (discord.py) does not appear to have support for slash commands, meaning that Comrade is currently unusable. 
+
 About/Design Philosophy
 ---
 
